@@ -1,0 +1,24 @@
+version: '3.8'
+services:
+  app:
+    build:
+      context: ${CONTEXT}
+      dockerfile: ../Dockerfile
+      args:
+        BASE_IMAGE: ${BASE_IMAGE}
+        DEPENDENCIES: ${DEPENDENCIES}
+        INSTALL_COMMAND: ${INSTALL_COMMAND}
+        BUILD_COMMAND: ${BUILD_COMMAND}
+        WORK_DIR: ${WORK_DIR}
+    image: my-app:1.0.0  # Tagging the image with version 1.0.0
+    environment:
+      - BASE_IMAGE=${BASE_IMAGE}
+      - DEPENDENCIES=${DEPENDENCIES}
+      - INSTALL_COMMAND=${INSTALL_COMMAND}
+      - BUILD_COMMAND=${BUILD_COMMAND}
+      - EXPOSE_PORT=${EXPOSE_PORT}
+      - WORK_DIR=${WORK_DIR}
+    ports:
+      - "${EXPOSE_PORT}:${EXPOSE_PORT}"
+    volumes:
+      - ./logs:/logs
